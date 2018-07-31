@@ -6,17 +6,17 @@ class Gui:
 
     def __init__(self):
         self.root = Tk()
-        self.main_frame = Frame(self.root, width = 1000, height=720)
+        self.main_frame = Frame(self.root, width = 720, height=720)
         self.main_frame.grid_propagate(False)
         self.main_frame.pack()
 
         self.text_box_frame = Frame(self.main_frame)
         self.text_box_frame.grid(row=0, column=0)
 
-        self.text_box = Text(self.text_box_frame, width=140, height=40)
+        self.text_box = Text(self.text_box_frame, width=90, height=40)
         self.text_box.pack()
 
-        self.button_frame = Frame(self.main_frame, width=140, height=40)
+        self.button_frame = Frame(self.main_frame, width=70, height=40)
         self.button_frame.grid(row=1, column=0)
 
         self.button = Button(self.button_frame, text='select file', command=self.get_file_name)
