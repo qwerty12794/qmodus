@@ -28,6 +28,10 @@ class FileObject(threading.Thread):
         else:
             self.running = False
 
+    def format_postcode(self, postcode):
+        if len(postcode) == 6:
+            postcode = postcode[:4] + ' ' + postcode[4:]
+        return postcode
 
     def run(self):
         while True:
@@ -39,13 +43,14 @@ class FileObject(threading.Thread):
                         self.text_box.delete('1.0', END)
                         for row in csvReader:
                             if row:
+                                print(row)
                                 company = row[0]
                                 postcode = row[1]
-                                query = '(bedrijfsnaam:"{}" AND postcode:"{}")'.format(company, postcode)
+                                formatted_postcode = self.format_postcode(postcode)
+                                query = '(bedrijfsnaam:"{}" AND postcode:"{}")'.format(company, formatted_postcode)
                                 self.text_box.insert(END, query)
                                 self.text_box.insert(END, '\n')
                                 self.count += 1
-                                print(row)
                         # lines = [x.strip() for x in file]
                         # self.text_box.delete('1.0', END)
                         # print(lines)
